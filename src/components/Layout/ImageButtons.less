@@ -1,0 +1,69 @@
+.imageButton {
+    @minWidth: 100px;
+    @height: 100%;
+    @fontColor: white;
+    @fontSize: 14px;
+    @imageWidth: 32px;
+    @imageHeight: @imageWidth;
+
+    min-width: @minWidth;
+    width: auto;
+    height: @height;
+    margin-left: 0px;
+    color: white;
+    position: relative;
+    float: left;
+
+    .image {
+        @marginLeft: @imageWidth/2;
+        width: 25px;
+        height: 25px;
+        left: calc(50% - 12px );
+        top: calc(50% - 27px );
+        float: left;
+        position: absolute;
+    }
+
+    .title {
+        text-align: center;
+        font-size: 1em;
+        font-family: 微软雅黑;
+        width: 100%;
+        height: @imageHeight;
+        line-height: @imageHeight;
+        float: left;
+        position: absolute;
+        bottom: 14px;
+        letter-spacing: 2px;
+        /*-webkit-box-reflect: below -0.3em -webkit-linear-gradient(top, transparent, transparent 20%, rgba(0, 0, 0, 0.2))*/
+    }
+
+    &:hover {
+        background-color: rgba(0,139,139,1);
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+}
+.imageButtons {
+    width: auto;
+    height: 100%;
+    position: relative;
+
+    div {
+        float: left;
+        width: 120px;
+    }
+
+    .selected {
+        background-image: url(../../Images/imgbtnsel.png);
+        background-color: none;
+        border-width: 1px;
+        border-color: rgba(255,255,255,0.2);
+        border-style: solid;
+        border-radius: 0px;
+        box-sizing: border-box;
+        background-size: contain;
+        background-repeat: no-repeat;
+        border: unset;
+    }
+}

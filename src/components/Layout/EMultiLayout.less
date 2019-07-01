@@ -1,0 +1,204 @@
+@headerHeight:30px;
+@tabBorderColor:#079fc9;
+.childrenBoxClass{
+    position: absolute; 
+    left:0;
+    bottom:0;
+    z-index: 999;
+    ul{
+        overflow: hidden; 
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        li{
+            float:left;
+            height:30px;
+            width:50px;
+            background: #378bff;
+            border: 1px solid #fff;
+            cursor:pointer;
+            text-align: center;
+            line-height: 30px;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            &:hover{
+                background: #74aeff;
+            }
+        }
+    }
+}
+.database-search-class{
+    height:40px;
+    width:100%;
+    padding-top: 5px;
+    overflow: hidden;
+    ul{
+        overflow: hidden;
+        width:calc(~"100% - 120px");
+        height: 100%;
+        float: right;
+        li{
+            float:right;
+            margin-right:10px;
+            margin-bottom: 5px;
+            list-style-type: none;
+            select{
+                height: 30px;
+                min-width: 60px;
+                border-radius: 3px;
+                margin-right: 5px;
+                option{
+
+                }
+            }
+            input{
+                height: 30px;
+                width:100px;
+                border-radius: 3px;
+            }
+            img{
+                cursor:pointer;
+                vertical-align: middle;
+            }
+        }
+    }
+    >img{
+        float:right;
+        cursor:pointer;
+        margin-right:5px;
+        height:32px;
+        width:32px;
+    }
+    button{
+        float:right;
+        background: #30a3df;
+        border: none;
+        border-radius: 5px;
+        margin-right:10px;
+        width: 70px;
+        color: white;
+        height: 35px;
+        font-size: 15px;
+        outline: none;
+        &:hover{
+            background:#44b8f4;
+        }
+    }
+}
+div[class^="M_"] {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+}
+div[class^="F_"] {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+}
+div[class^="FH_"] {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+}
+.multiSelect {
+    top: 20px;
+    right: 20px;
+    float: right;
+    position: absolute;
+    z-index: 99;
+    min-width: 120px;
+    border: 1px solid rgba(0,122,204,0.7);
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 3px;
+    height: 27px;
+    margin: 1px;
+    color: white;
+    font-size: 14px;
+}
+
+.multiTabs {
+    width: 100%;
+    height: @headerHeight;
+    overflow: hidden;
+    position: relative;
+    background-color:#F3F3F3;
+    ul {
+        width: 100%;
+        height: 25px;
+        margin: 5px 0 0 0;
+        list-style-type: none;
+        border: none;
+        border-bottom: 1px solid @tabBorderColor;
+        li {
+            float: left;
+            margin: -2px 5px 0px 5px;
+            padding: 0px 10px;
+            cursor: pointer;
+            line-height: 25px;
+            background-color: #ffffff;
+            color: black;
+            border: 1px solid #e6e5e1;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            font-size: 14px;
+
+            &.currentTab {
+                border: 1px solid @tabBorderColor;
+                color: @tabBorderColor;
+                border-bottom-color: transparent;
+            }
+
+            &:hover {
+                background-color: white;
+                border: 1px solid @tabBorderColor;
+                color: @tabBorderColor;
+                border-bottom-color: transparent;
+            }
+        }
+    }
+}
+
+.multiTabsContent {
+    height: calc(~"100% - @{headerHeight}");
+    width: 100%;
+    position: absolute;
+    top: @headerHeight;
+    z-index: 5;
+
+    > div {
+        border: 1px solid rgba(243, 243, 243, 10);
+        box-sizing: border-box;
+    }
+    .childrenBox {
+        .childrenBoxClass;
+    }
+    .database-search{
+       .database-search-class;
+    }
+}
+
+.multiContent {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    z-index: 5;
+
+    > div {
+        /*border: 1px solid rgba(243, 243, 243, 10);*/
+        box-sizing: border-box;
+        overflow-y: hidden;
+    }
+    .childrenBox {
+        .childrenBoxClass;
+    }
+    .tableContainer{
+        overflow-y:auto;
+    }
+    .database-search{
+        .database-search-class;
+     }
+}
