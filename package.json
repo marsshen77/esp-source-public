@@ -41,7 +41,9 @@
     "@types/react": "^16.8.19",
     "@types/react-dom": "^16.8.4",
     "echarts": "^4.2.1",
+    "linq": "^3.2.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "whatwg-fetch": "^3.0.0"
   }
 }

@@ -1,6 +1,7 @@
 
 import EChartOptionCreator from './EChartOptionCreator';
 import EChartSourceCreator from './EChartSourceCreator';
+import echarts4 from 'echarts';
 const EChartFactory = function (themeName) {
     this.themeName = themeName || esp.config.options.echarts.theme || 'default';
     /**

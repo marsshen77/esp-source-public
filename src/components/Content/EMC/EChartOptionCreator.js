@@ -1,4 +1,5 @@
 
+import { findFirst,findFirstFromToIndex,removeAll  } from '../../Base/JQuery/jquery.extensions';
 const EChartOptionCreator = function () {
     this.GetOption = function (optionName, parmeters) {
         var target = new window[optionName];

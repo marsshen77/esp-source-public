@@ -314,7 +314,6 @@ class EMapViewControl extends React.Component {
 
     //选中的要素高亮
 
-
     render() {
         var imgStyle = {
             width: '100%',

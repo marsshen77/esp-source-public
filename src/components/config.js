@@ -30,11 +30,11 @@ const esp = {
         if (data.ProjectFunction) {
             esp.loadScript(data.ProjectFunction);
         }
-        if (data.CssFile) {
-            esp.loadStyleFile(data.CssFile);
+        if (data.Project.CssFile) {
+            esp.loadStyleFile(data.Project.CssFile);
         }
-        if (data.JsFile) {
-            esp.loadScriptFile(data.JsFile);
+        if (data.Project.JsFile) {
+            esp.loadScriptFile(data.Project.JsFile);
         }
         esp.projectID = data.Project.ID;
         document.title = data.Project.Title;
@@ -89,6 +89,18 @@ const esp = {
             style.href = url;
             document.getElementsByTagName("head")[0].appendChild(style);
         }
+    },
+    loadScript: code => {
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        try {
+            // firefox、safari、chrome and Opera
+            script.appendChild(document.createTextNode(code));
+        } catch (ex) {
+            // IE
+            script.text = code;
+        }
+        document.getElementsByTagName("head")[0].appendChild(script);
     },
     defaultRS: []
 };

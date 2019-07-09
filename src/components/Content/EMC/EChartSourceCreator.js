@@ -1,4 +1,5 @@
 
+import Enumerable from 'linq';
 const EChartSourceCreator = function () {
     /**
      * 加载饼状图
@@ -43,7 +44,6 @@ const EChartSourceCreator = function () {
             axisData: columns,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -89,7 +89,6 @@ const EChartSourceCreator = function () {
             axisData: columns,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -135,7 +134,6 @@ const EChartSourceCreator = function () {
             axisData: columns,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -181,7 +179,6 @@ const EChartSourceCreator = function () {
             axisData: columns,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -227,7 +224,6 @@ const EChartSourceCreator = function () {
             axisData: columns,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -273,7 +269,6 @@ const EChartSourceCreator = function () {
             axisData: columns,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -319,7 +314,6 @@ const EChartSourceCreator = function () {
             axisData: columns,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -345,7 +339,6 @@ const EChartSourceCreator = function () {
         var result = {
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -391,7 +384,6 @@ const EChartSourceCreator = function () {
             axisData: columns,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -428,7 +420,6 @@ const EChartSourceCreator = function () {
             timeline: timeLineName,
             scatterPointName: scatterPointName
         };
-        console.log(result)
         return result;
     }
     /**
@@ -475,7 +466,6 @@ const EChartSourceCreator = function () {
             axisData: columns,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -522,7 +512,6 @@ const EChartSourceCreator = function () {
             axisData: columns,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**
@@ -550,7 +539,6 @@ const EChartSourceCreator = function () {
         var result = {
             series: seriesData
         };
-        console.log(result)
         return result;
     }
     /**
@@ -605,7 +593,6 @@ const EChartSourceCreator = function () {
             indicator: indicator,
             series: series
         };
-        console.log(result)
         return result;
     }
     /**

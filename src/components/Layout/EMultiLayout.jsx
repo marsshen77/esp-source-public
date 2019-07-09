@@ -3,9 +3,10 @@ import React from 'react';
 import './EMultiLayout.less';
 
 const EMultiLayout = props => {
-    const code = props.code || 'M_11';
+    let code = props.code || 'M_11';
     const showSelect = code === 'M_SELECT';
     const showTabs = code === 'M_TABS';
+    if (showSelect || showTabs) code = 'M_11';
     //多布局
     const calcItemsStyle = () => {
         let [, rowcol, connectStr, outerPadStr, innerPadStr] = code.split('_');
@@ -284,14 +285,24 @@ const EMultiLayout = props => {
     }
     const layoutCode = code;
     const childrenItems = createItems();
+    const getOptionItems = () => {
+        return props.children.map((item, index) => {
+            //由于EMC表中Name字段用于区分不同菜单中同名EMC导致EMC名字过长，暂时取最后一个'-'后面的内容当做名字表示
+            const title = item.props.title.split('-').pop();
+            return {
+                value: 'p' + (index + 1),
+                text: title
+            }
+        });
+    }
     return (
         <div className={layoutCode}>
             <div className={'multiContent'}>
                 {showSelect &&
-                    <EMultiLayoutSelect className={'multiSelect'} changeFunc={changeItem} optionItems={optionItems} />
+                    <EMultiLayoutSelect className={'multiSelect'} changeFunc={changeItem} optionItems={getOptionItems()} />
                 }
                 {showTabs &&
-                    <EMultiLayoutTabS className={'multiTabs'} changeFunc={changeItem} optionItems={optionItems} />}
+                    <EMultiLayoutTabS className={'multiTabs'} changeFunc={changeItem} optionItems={getOptionItems()} />}
                 {childrenItems}
             </div>
         </div>
@@ -342,7 +353,7 @@ class EMultiLayoutSelect extends React.Component {
     }
 
     render() {
-        const optionItems = this.props.optionItems.map((item) => <option value={item.value}>{item.text}</option>);
+        const optionItems = this.props.optionItems.map((item) => <option key={item.value} value={item.value}>{item.text}</option>);
         return (
             <select style={this.style} className={this.props.className} onChange={this.changeFunc}>{optionItems}</select>
         );
@@ -368,7 +379,7 @@ class EMultiLayoutTabS extends React.Component {
     render() {
         let current = this.state.current;
         const optionItems = this.props.optionItems.map((item) =>
-            <li value={item.value} className={current === item.value ? 'currentTab' : ''} onClick={this.changeFunc}>{
+            <li key={item.value}  value={item.value} className={current === item.value ? 'currentTab' : ''} onClick={this.changeFunc}>{
                 item.text}</li>);
         return (
             <div className={this.props.className}>

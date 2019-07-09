@@ -2,6 +2,7 @@ import React from 'react';
 import { useFetch } from '../Hooks/ToolsHooks';
 import EMultiLayout from './EMultiLayout';
 import EMC from '../Content/EMC/EMC';
+import UserControl from '../Content/UserControl/UserControl';
 import './EDockWindows.less';
 
 const EDockWindows = React.memo(props => {
@@ -22,7 +23,7 @@ const EDockWindow = props => {
     const headerItems = [];
     const footerItems = [];
     for (let config of configs) {
-        const item = <EDockWindowContent key={config.ID} {...config} />
+        const item = <EDockWindowContent key={config.ID} {...config}/>
         if (config.Position == 'Content') contentItems.push(item);
         if (config.Position == 'Header') headerItems.push(item);
         if (config.Position == 'Footer') footerItems.push(item);
@@ -46,6 +47,7 @@ const EDockWindowContent = props => {
     return (
         <>
             {type === 'EMC' && <EMC {...props}/>}
+            {type == 'UserControl' && <UserControl {...props}/>}
         </>
     )
 }
