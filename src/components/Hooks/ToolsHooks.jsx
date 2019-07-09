@@ -1,9 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import 'whatwg-fetch';
 
 const useFetch = url => {
     const [data, setData] = useState(null);
-
     const myFetch = async () => {
         try {
             const resp = await fetch(url);
@@ -20,6 +19,8 @@ const useFetch = url => {
         },
         [url]
     );
+    const preUrl = usePrevious(url);
+    if (preUrl && preUrl !== url) return null;
     return data;
 };
 
@@ -51,7 +52,15 @@ const useLoadScriptFile = url => {
         else
             loadScriptFile()
     }, [url])
-    if(!url) return true;
+    if (!url) return true;
     return loaded;
+}
+
+const usePrevious = value => {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = value;
+    });
+    return ref.current;
 }
 export { useFetch, useLoadScriptFile };

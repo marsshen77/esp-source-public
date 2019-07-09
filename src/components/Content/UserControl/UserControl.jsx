@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useFetch, useLoadScriptFile } from '../../Hooks/ToolsHooks';
+import HtmlControl from '../../Controls/HtmlControl';
 
 const UserControl = props => {
     const config = useFetch(`${esp.url}api/DockWindow/GetUserControl?userControlID=${props.ID}`);
@@ -9,6 +10,7 @@ const UserControl = props => {
         <div style={style}>
             {config.EType === 'Control' && <CommonControl {...config} />}
             {config.EType === 'WebpackControl' && <WebpackControl {...config} />}
+            {config.EType === 'Html' && <HtmlControl html={config.Content} id={config.ID} />}
         </div >
     )
 }
@@ -22,8 +24,7 @@ const CommonControl = props => {
     const loaded = useLoadScriptFile(props.Url);
     const getControl = () => {
         const Control = window[props.Content];
-        const param = props.Parmeters ? JSON.parse(props.Parmeters) : {};
-        return Control ? <Control {...param} /> : null;
+        return Control ? <Control config={props} /> : null;
     }
     return (
         <>

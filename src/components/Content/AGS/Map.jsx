@@ -1,3 +1,7 @@
+import { loadModules } from 'esri-loader';
+import { useFetch } from '../../Hooks/ToolsHooks';
+import mapExtensions from './MapExtension';
+const options = { url: `http://172.16.9.121:8078/arcgis_js_api/library/4.8/init.js` };
 class EMapViewControl extends React.Component {
     constructor(props) {
         super(props);
@@ -258,31 +262,32 @@ class EMapViewControl extends React.Component {
 
     identifyFeatureLayer(layer, identifyGeometry) {
         var _this = this;
-        require([
-            "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/Graphic", "dojo/domReady!"], function (IdentifyTask, IdentifyParameters, Graphic) {
-                var identifyTask = new IdentifyTask(layer.url);
-                var params = new IdentifyParameters();
-                params.tolerance = 10;
-                params.geometry = identifyGeometry;
-                params.layerIds = [layer.layerId];
-                params.layerOption = "top";
-                params.width = _this.mapView.width;
-                params.height = _this.mapView.height;
-                params.mapExtent = _this.mapView.extent;
-                identifyTask.execute(params).then(function (response) {
-                    for (var i = 0; i < response.results.length; i++) {
-                        response.results[i].layerId = layer.id;
-                    }
-                    var results = _this.identifyResults.concat(response.results);
-                    _this.identifyResults = results;
-                    if (--_this.layerLength <= 0) {
-                        //到最后一个
-                        var features = _this.setFeaturePopupTemplate(_this.identifyResults);
-                        _this.createPopup(identifyGeometry, features);
+        loadModules([
+            "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/Graphic", "dojo/domReady!"
+        ], options).then(function (IdentifyTask, IdentifyParameters, Graphic) {
+            var identifyTask = new IdentifyTask(layer.url);
+            var params = new IdentifyParameters();
+            params.tolerance = 10;
+            params.geometry = identifyGeometry;
+            params.layerIds = [layer.layerId];
+            params.layerOption = "top";
+            params.width = _this.mapView.width;
+            params.height = _this.mapView.height;
+            params.mapExtent = _this.mapView.extent;
+            identifyTask.execute(params).then(function (response) {
+                for (var i = 0; i < response.results.length; i++) {
+                    response.results[i].layerId = layer.id;
+                }
+                var results = _this.identifyResults.concat(response.results);
+                _this.identifyResults = results;
+                if (--_this.layerLength <= 0) {
+                    //到最后一个
+                    var features = _this.setFeaturePopupTemplate(_this.identifyResults);
+                    _this.createPopup(identifyGeometry, features);
 
-                    }
-                });
+                }
             });
+        });
     }
 
     createPopup(identifyGeometry, features) {
@@ -292,9 +297,8 @@ class EMapViewControl extends React.Component {
 
     identifyDynamicLayer(QueryDynamicLayerUrl, drawFrameGeometry) {
         var _this = this;
-        require(["esri/tasks/IdentifyParameters", "esri/tasks/IdentifyTask", "esri/layers/ArcGISDynamicMapServiceLayer",
-            "dojo/domReady!"
-        ], function (IdentifyParameters, IdentifyTask, ArcGISDynamicMapServiceLayer) {
+        loadModules(["esri/tasks/IdentifyParameters", "esri/tasks/IdentifyTask", "esri/layers/ArcGISDynamicMapServiceLayer", "dojo/domReady!"
+        ], options).then(function (IdentifyParameters, IdentifyTask, ArcGISDynamicMapServiceLayer) {
             var identifyParams = new IdentifyParameters();
             identifyParams.geometry = drawFrameGeometry
             identifyParams.tolerance = 3;
@@ -334,7 +338,7 @@ class EMapViewControl extends React.Component {
     }
 };
 
-class EMapContainer extends React.Component {
+/* class EMapContainer extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -363,7 +367,20 @@ class EMapContainer extends React.Component {
         var content = <Control mapModel={this.state.mapModel} />;
         return content;
     }
-};
+}; */
+
+const EMapContainer = props => {
+    const mapModel = useFetch(`${esp.url}api/Map/Get?id=${props.ID}`);
+    if (!mapModel) return null;
+    const controlName = mapModel.ControlName || 'EMapViewControl';
+    if (controlName === 'EMapViewControl') return (<EMapViewControl mapModel={mapModel} />)
+    else {
+        const Control = window[controlName];
+        return (
+            <Control mapModel={mapModel} />
+        )
+    }
+}
 
 class AutoMiniWindow extends React.Component {
     constructor(props) {
@@ -395,3 +412,4 @@ class AutoMiniWindow extends React.Component {
         );
     }
 };
+export default EMapContainer;

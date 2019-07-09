@@ -6,7 +6,7 @@
  * 
  * @return 返回数组中第一个符合条件的项
  */
-function findFirst(arr, func) {
+window.findFirst = function findFirst(arr, func) {
     for (var index = 0; index < arr.length; index++) {
         if (func(arr[index]))
             return arr[index];
@@ -22,7 +22,7 @@ function findFirst(arr, func) {
  * 
  * @return 返回数组中第一个符合条件的项
  */
-function findAll(arr, func) {
+window.findAll = function findAll(arr, func) {
     var arrs = [];
     for (var index = 0; index < arr.length; index++) {
         if (func(arr[index]))
@@ -36,7 +36,7 @@ function findAll(arr, func) {
  * 拷贝数组
  * @param {any} 
  */
-function copyArr(obj) {
+window.copyArr = function copyArr(obj) {
     // Handle the 3 simple types, and null or undefined or function
     if (null == obj || "object" != typeof obj) return obj;
 
@@ -66,7 +66,7 @@ function copyArr(obj) {
  * 
  * @return 返回数组中第一个符合条件的项
  */
-function findFirstFromIndex(fromIndex, arr, func) {
+window.findFirstFromIndex = function findFirstFromIndex(fromIndex, arr, func) {
     for (var index = fromIndex; index < arr.length; index++) {
         if (func(arr[index]))
             return arr[index];
@@ -82,7 +82,7 @@ function findFirstFromIndex(fromIndex, arr, func) {
  * 
  * @return 返回数组中第一个符合条件的项
  */
-function findFirstFromToIndex(fromIndex, toIndex, arr, func) {
+window.findFirstFromToIndex = function findFirstFromToIndex(fromIndex, toIndex, arr, func) {
     if (fromIndex > toIndex) return null;
     for (var index = fromIndex; index < toIndex; index++) {
         if (func(arr[index]))
@@ -100,7 +100,7 @@ function findFirstFromToIndex(fromIndex, toIndex, arr, func) {
  * 
  * @return 返回数组中所有符合条件的项
  */
-function findFromToIndex(fromIndex, toIndex, arr, func) {
+window.findFromToIndex = function findFromToIndex(fromIndex, toIndex, arr, func) {
     if (fromIndex > toIndex) return null;
     var arrs = [];
     for (var index = fromIndex; index < toIndex; index++) {
@@ -117,7 +117,7 @@ function findFromToIndex(fromIndex, toIndex, arr, func) {
  * 
  * @return 
  */
-function removeAll(arr, func) {
+window.removeAll = function removeAll(arr, func) {
     for (var index = 0; index < arr.length; index++) {
         if (func(arr[index])) {
             arr.remove(index, index);
@@ -133,7 +133,7 @@ function removeAll(arr, func) {
  * 
  * @return object 重建好的Series
  */
-function rebuildSeries(series, maxValue) {
+window.rebuildSeries = function rebuildSeries(series, maxValue) {
     if (series && series.symbolSize && (typeof series.symbolSize == 'function')) {
         series.symbolSize = function (val) {
             return 6 + val[2] / maxValue * 4;
@@ -148,7 +148,7 @@ function rebuildSeries(series, maxValue) {
  * 
  * @return object 重建好的Series
  */
-function rebuildScatter(series, maxValue) {
+window.rebuildScatter = function rebuildScatter(series, maxValue) {
     if (series && series.symbolSize && (typeof series.symbolSize == 'function')) {
         series.symbolSize = function (val) {
             return 8 + val[2] / maxValue * 5;
@@ -246,4 +246,3 @@ window.getQueryString = function (name) {
     }
     return null;
 }
-export { findFirst, findAll, copyArr, findFirstFromIndex, findFirstFromToIndex, findFromToIndex, removeAll, rebuildSeries, rebuildScatter }
