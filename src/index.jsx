@@ -8,6 +8,7 @@ import EChartOptionCreator from './components/Content/EMC/EChartOptionCreator';
 import Enumerable from 'linq';
 import './components/Base/JQuery/jquery.extensions';
 
+import DataTable from './components/Content/EMC/DataTableControl';
 const config = {
     url:'http://172.16.9.121:8111/UIService/'
 }
@@ -17,7 +18,8 @@ window.EChartFactory = EChartFactory;
 window.EChartSourceCreator = EChartSourceCreator;
 window.EChartOptionCreator = EChartOptionCreator;
 window.Enumerable = Enumerable;
-ReactDOM.render(
+/* ReactDOM.render(
     <EMainWindow projectID={'969a2aa0-c3df-449e-b324-375fb28a01fd'}/>,
     document.getElementById("container")
-);
+); */
+ReactDOM.render(<DataTable />,document.getElementById("container"));
