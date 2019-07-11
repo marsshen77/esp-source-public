@@ -1,3 +1,5 @@
+import React from 'react';
+import mapExtensions from './MapExtension';
 class EMapLayer extends React.Component {
     constructor(props) {
         super(props);
@@ -10,11 +12,10 @@ class EMapLayer extends React.Component {
             return;
 
         var _this = this;
-        var mapExtensions = new window.mapExtensions();
-        mapExtensions.convertToLayers(this.props.dataSource, function (layers) {
+        var extensions = new mapExtensions();
+        extensions.convertToLayers(this.props.dataSource, function (layers) {
             map.addMany(layers);
-            mapExtensions.createLayerTree(mapView, document.getElementById('mapListTree'), function (layerList) {
-                console.log(layerList);
+            extensions.createLayerTree(mapView, document.getElementById('mapListTree'), function (layerList) {
                 map.mapLayerControl = _this;
             });
         });
@@ -34,3 +35,4 @@ class EMapLayer extends React.Component {
         );
     }
 }
+export default EMapLayer;

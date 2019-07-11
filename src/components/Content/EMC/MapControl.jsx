@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import EMultiLayout from '../../Layout/EMultiLayout';
 import { useFetch } from '../../Hooks/ToolsHooks';
-import EChartsFactory from '../EMC/EChartsFactory';
-const EChartsControl = props => {
+import EChartsFactory from './EChartsFactory';
+const MapControl = props => {
     const config = useFetch(`${esp.url}api/EMC/GetDataSource?id=${props.id}`);
     if (!config) return null;
     const groups = {};
@@ -16,7 +16,7 @@ const EChartsControl = props => {
     });
     const items = [];
     for(let groupName in groups){
-        items.push(<EChartsItem key={groupName} ID={config.ID+'_'+groupName} option={config.Option} data={groups[groupName]} title={groupName}/>)
+        items.push(<MapItem key={groupName} ID={config.ID+'_'+groupName} option={config.Option} data={groups[groupName]} title={groupName}/>)
     }
     return (
         <EMultiLayout code={config.MultiLayoutCode}>
@@ -25,7 +25,7 @@ const EChartsControl = props => {
     )
 }
 
-const EChartsItem = props => {
+const MapItem = props => {
     useEffect(() => {
         const factory = new EChartsFactory();
         const funName = 'Load' + props.option.EType;
@@ -33,4 +33,4 @@ const EChartsItem = props => {
     })
     return <div style={{height:'100%',width:'100%'}} id={props.ID}></div>
 }
-export default EChartsControl;
+export default MapControl;

@@ -1,0 +1,817 @@
+.EPTreeView {
+    background-color: transparent;
+    margin-top: 5px;
+    font-family: 微软雅黑;
+
+    .selected > div:first-child > span {
+        color: #FF8000;
+    }
+
+    li {
+        list-style-type: none;
+        margin-left: -25px;
+        margin-top: 10px;
+        > div {
+            .unExpended {
+                width: 0;
+                height: 0;
+                border-top: 6px solid transparent;
+                border-left: 8px solid darkgray;
+                border-bottom: 6px solid transparent;
+                float: left;
+                margin-top: 5px;
+                cursor: pointer;
+                &:hover {
+                    border-left: 8px solid orange;
+                }
+            }
+
+            > .expended {
+                width: 0;
+                height: 0;
+                border-top: 8px solid darkgray;
+                border-right: 6px solid transparent;
+                border-left: 6px solid transparent;
+                float: left;
+                margin-top: 8px;
+                margin-left: -4px;
+                cursor: pointer;
+                &:hover {
+                    border-top: 8px solid orange;
+                }
+            }
+        }
+    }
+
+    input {
+        line-height: 30px;
+        vertical-align: middle;
+        margin-top: 5px;
+        float: left;
+    }
+
+    .s_icon {
+        float: left;
+        width: 16px;
+        height: 16px;
+        margin-top: 3px;
+        background-size: 100% 100%;
+    }
+
+    span {
+        font-size: 16px;
+        &:hover {
+            color: #FF8000;
+            cursor: default;
+        }
+    }
+}
+
+.autoMiniWindow {
+    position: absolute;
+    width: 300px;
+    height: 80%;
+    margin-left: 65px;
+    background-color: transparent;
+    top: 10%;
+    border: 1px solid gray;
+
+    > .title {
+        height: @amw_TitleHeight;
+        background-color: rgba(7,18,35,0.8);
+
+        > img {
+            width: 18px;
+            height: 18px;
+            float: left;
+            margin-right: 5px;
+            margin-top: 6px;
+            margin-left: 5px;
+        }
+
+        > span {
+            line-height: 30px;
+            vertical-align: middle;
+            color: white;
+        }
+
+        > .close {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            overflow: hidden;
+            border-radius: 12px;
+            background-color: transparent;
+            float: right;
+            cursor: pointer;
+        }
+    }
+}
+
+@amw_TitleHeight:30px;
+
+
+.autoMiniWindow > .title > .close::before, .autoMiniWindow > .title > .close::after {
+    content: '';
+    position: absolute;
+    width: 80%;
+    top: 50%;
+    left: 10%;
+    height: 3px;
+    border-radius: 5px;
+    background: #ffffff;
+}
+
+.autoMiniWindow > .title > .close::before {
+    transform: rotate(45deg);
+}
+
+.autoMiniWindow > .title > .close::after {
+    transform: rotate(-45deg);
+}
+
+.autoMiniWindow > .content {
+    background-color: transparent;
+    height: calc(~"100% - @{amw_TitleHeight}");
+    width: 100%;
+    position: absolute;
+}
+
+.autoMiniWindow > .content > div:first-child {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: rgba(255,255,255,0.9);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+
+.mapViewContainer {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.mapViewContainer > .Toolbar {
+    width: auto;
+    min-width: 50px;
+    height: 30px;
+    margin-top: 2px;
+    background-color: transparent;
+    float: right;
+    border-radius: 3px;
+    text-align: right;
+    padding-right: 10px;
+    position: absolute;
+    right: 15px;
+    top: 0px;
+    /*display:none;*/
+}
+
+.mapViewContainer > .Toolbar > .IconToolbar {
+    float: right;
+    margin-top: 5px;
+    cursor: pointer;
+    background-color: #333333;
+}
+.ShowLayerFilterButton {
+    position: absolute;
+    top: 190px;
+    right: 120px;
+    float: right;
+    width: 64px;
+    height: 28px;
+    background-color: darkgrey;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 3px;
+}
+
+.ShowLayerFilterButton > span {
+    text-align: center;
+    line-height: 28px;
+    font-size: 13px;
+}
+
+.ShowLayerFilterButton > span:hover {
+    color: lightblue;
+}
+
+.LayerEditorButton {
+    position: absolute;
+    top: 190px;
+    right: 20px;
+    float: right;
+    width: 64px;
+    height: 28px;
+    background-color: darkgrey;
+    cursor: pointer;
+    text-align: center;
+    color: white;
+    border-radius: 3px;
+}
+
+.LayerEditorButton > span {
+    text-align: center;
+    line-height: 28px;
+    font-size: 13px;
+}
+
+.LayerEditorButton > span:hover {
+    color: lightblue;
+}
+
+.LayerEditorButton select {
+    clear: both;
+    width: 50%;
+    height: 30px;
+    max-width: 50%;
+    float: left;
+}
+
+.LayerEditorButton select option {
+    width: auto;
+    height: 28px;
+    padding: 0px;
+    min-height: 28px;
+    max-height: 30px;
+    line-height: 30px;
+    height: 30px;
+    margin: 5px auto;
+}
+
+.LayerEditorButton .refreshButton {
+    clear: both;
+    width: 50px;
+    height: 26px;
+    max-width: 50%;
+    float: right;
+    border: 1px solid lightblue;
+    border-radius: 5px;
+    font-size: 12px;
+    top: 6px;
+    position: absolute;
+    right: 10px;
+    text-align: center;
+    line-height: 26px;
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.8);
+}
+
+.LayerEditorButton .refreshButton:hover {
+    color: darkcyan;
+}
+
+.LayerEditorButton .EditToolbar {
+    position: absolute;
+    width: auto;
+    height: auto;
+    max-height: 300px;
+    background-color: rgba(255,255,255,0.8);
+    top: 100%;
+    right: 0px;
+    display: none;
+    border: 1px solid lightgray;
+    padding: 5px;
+    border-radius: 5px;
+    color: black;
+    text-align: left;
+}
+
+.LayerEditorButton .dijitToolbar > table {
+    display: none;
+}
+
+.LayerEditorButton .atiDeleteButton {
+    display: none;
+}
+
+.LayerEditorButton .editFeatureTableContainer {
+    position: fixed;
+    left: 330px;
+    right: 405px;
+    bottom: 23px;
+    height: 250px;
+    background-color: white;
+    color: black;
+    overflow: auto;
+    display: none;
+    border: 1px solid lightgray;
+}
+
+/*---滚动条大小--*/
+.LayerEditorButton .editFeatureTableContainer ::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+    z-index: 999;
+}
+
+.LayerEditorButton .ui-icon dgrid-hider-toggle {
+    position: absolute;
+    float: right;
+    right: 30px;
+    top: 5px;
+}
+
+.LayerEditorButton .dgrid-scrollbar-width {
+    width: 18px;
+}
+
+.filterWindow {
+    width: 600px;
+    height: 360px;
+    background-color: rgba(255,255,255,0.4);
+    position: fixed;
+    left: 50%;
+    margin-left: -300px;
+    top: 50%;
+    margin-top: -180px;
+    padding: 1px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    display: none;
+}
+
+@filter_title_height:30px;
+.filterWindow > .title {
+    height: @filter_title_height;
+    width: 100%;
+    background-color: darkcyan;
+    border-radius: 5px 5px 0px 0px;
+    line-height: 30px;
+    font-size: 13px;
+    text-align: left;
+}
+
+.filterWindow > .title > span {
+    margin-left: 5px;
+}
+
+.filterWindow > .title > .closeButton {
+    float: right;
+    margin-right: 5px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.filterWindow > .title > .closeButton:hover {
+    opacity: 1;
+}
+
+.filterWindow > .content {
+    height: calc(~"100% - @{filter_title_height}");
+    width: 100%;
+    background-color: white;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    color: black;
+}
+
+@layerfilter_title_height:30px;
+.layerFitlerPanel {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.layerFitlerPanel > .toolbar {
+    width: 100%;
+    height: @layerfilter_title_height;
+    background-color: white;
+}
+
+.layerFitlerPanel > .toolbar > .updateButton {
+    float: right;
+    width: 60px;
+    height: 23px;
+    border: 1px solid lightblue;
+    border-radius: 5px;
+    line-height: 23px;
+    font-size: 12px;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-top: 3px;
+    background-color: darkcyan;
+    color: white;
+    opacity: 0.8;
+}
+
+.layerFitlerPanel > .toolbar > .updateButton:hover {
+    opacity: 1;
+}
+
+.layerFitlerPanel > .filters {
+    width: 100%;
+    height: calc(~"100% - @{layerfilter_title_height}");
+    overflow-y: auto;
+}
+
+.layerFitlerPanel .layerFitlerItem {
+    width: 100%;
+    height: 30px;
+    margin-top: 5px;
+    font-size: 13px
+}
+
+.layerFitlerPanel .layerFitlerItem .fName {
+    width: 100px;
+    min-width: 100px;
+    text-align: left;
+    line-height: 30px;
+    float: left;
+    margin-left: 5px;
+}
+
+.layerFitlerPanel .layerFitlerItem .fEqual {
+    width: 90px;
+    min-width: 90px;
+    text-align: left;
+    line-height: 30px;
+    float: left;
+}
+
+.layerFitlerPanel .layerFitlerItem .fEqual select {
+    width: 100%;
+    max-width: 100%;
+}
+
+.layerFitlerPanel .layerFitlerItem .fValue {
+    width: calc(~"100% - 290px");
+    min-width: 70px;
+    text-align: left;
+    line-height: 30px;
+    float: left;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.layerFitlerPanel .layerFitlerItem .fValue input {
+    width: 100%;
+    height: 26px;
+    max-width: 1000px;
+    margin-top: 0px;
+}
+
+.layerFitlerPanel .layerFitlerItem .fRelType {
+    width: 60px;
+    min-width: 60px;
+    text-align: left;
+    line-height: 30px;
+    float: left;
+}
+
+.layerFitlerPanel .layerFitlerItem .fRelType select {
+    width: 100%;
+    max-width: 120px;
+}
+
+.dijitMenuTable {
+    width: 150px;
+    cursor: pointer;
+}
+
+.dijitMenuTable tr {
+    height: 30px;
+}
+
+.dijitMenuTable tr[aria-label='Center on Selection '] {
+    display: none;
+}
+
+.zoomToBar {
+    width: 410px;
+    height: auto;
+    position: absolute;
+    top: 30px;
+    right: 15px;
+    padding: 5px;
+}
+
+.zoomToBar > .button {
+    float: right;
+    width: 64px;
+    height: 28px;
+    font-size: 13px;
+    line-height: 28px;
+    text-align: center;
+    border-radius: 3px;
+    background-color: darkgrey;
+    color: white;
+    cursor: pointer;
+}
+
+.zoomToBar > .panel {
+    float: right;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    border: 1px solid lightblue;
+    border-radius: 3px;
+    background-color: rgba(128, 128, 128, 0.7);
+    color: white;
+    display: none;
+}
+
+.zoomToBar input {
+    float: left;
+    width: 70px;
+    height: 23px;
+    max-width: 100px;
+    margin-left: 15px;
+}
+
+.zoomToBar .c1 {
+    width: 100%;
+    height: 30px;
+}
+
+.zoomToBar .c1 > div {
+    float: left;
+    width: auto;
+    line-height: 30px;
+    text-align: center;
+    margin-left: 5px;
+}
+
+.zoomToBar .c1 > .zoomButton {
+    float: right;
+    cursor: pointer;
+    width: 50px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    font-size: 12px;
+    border: 1px solid lightblue;
+    margin-top: 1px;
+    opacity: 0.8;
+}
+
+.zoomToBar .c1 > .zoomButton:hover {
+    border-color: darkcyan;
+}
+
+.zoomToBar .c1 div:hover {
+    opacity: 1;
+}
+
+.atiDeleteButton {
+    display: none;
+    visibility: hidden;
+}
+
+.poi_searchbar {
+    position: absolute;
+    right: 20px;
+    top: 50px;
+    height: auto;
+    height: 45px;
+    width: auto;
+    padding: 2px;
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 2px;
+    background-color: rgba(255,255,255,0.6);
+}
+
+.poi_searchbar > .panel {
+    width: 300px;
+    float: left;
+    height: 100%;
+    position: relative;
+}
+
+.poi_searchbar > .panel > div:first-child {
+    width: 100%;
+    background-color: green;
+}
+
+.poi_searchbar > .panel input {
+    max-width: initial;
+    width: 100%;
+    position: absolute;
+    top: 1px;
+    bottom: 1px;
+    margin: 0px;
+}
+
+.poi_searchbar > .panel > .clear {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    float: right;
+    top: 1px;
+    right: 33px;
+    cursor: pointer;
+    background-image: url(../../../images/clear.png);
+    background-size: 24px 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.poi_searchbar > .panel > .searchButton {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    float: right;
+    top: calc(50% - 16px);
+    right: 0px;
+    cursor: pointer;
+    background-image: url(../../../images/search.png);
+    background-size: 24px 24px;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.poi_searchbar > .panel > div:last-child:hover {
+    background-color: rgba(58, 207, 222, 0.23);
+}
+
+.poi_searchbar > .tgButton {
+    margin-top: 5px;
+    height: 100%;
+    width: 32px;
+    height: 32px;
+    float: right;
+    cursor: pointer;
+    background-size: 100% 100%;
+}
+
+.poi_searchbar > .tgButton:hover {
+    background-color: rgba(178, 239, 234, 0.09);
+}
+
+.poi_searchbar > .min {
+    display: block;
+}
+
+.poi_searchbar > .result {
+    border: 1px solid gray;
+    border-top: none;
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    overflow-y: auto;
+    overflow-x: auto;
+    position: absolute;
+    top: 100%;
+    color: gray;
+    display: none;
+}
+
+.poi_searchbar > .result > div {
+    height: auto;
+    font-size: 15px;
+    line-height: 30px;
+    cursor: pointer;
+    padding-left: 5px;
+    background-color: rgb(237, 242, 242);
+    margin-top: 2px;
+    opacity: 0.8;
+    position: relative;
+}
+
+.poi_searchbar > .result > .selected {
+    background-color: rgb(190, 239, 239);
+}
+
+.poi_searchbar > .result > div > div:first-child {
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+    width: 100%;
+    font-weight: bold;
+    color: black;
+}
+
+.poi_searchbar > .result > div > div:last-child {
+    height: 30px;
+    font-size: 12px;
+    line-height: 30px;
+}
+
+.poi_searchbar > .result > div:hover {
+    opacity: 1;
+}
+
+.poi_searchbar > .result > div:first-child {
+    height: 40px;
+    color: black;
+    font-weight: bold;
+    line-height: 40px;
+}
+
+.polygonQueryResult {
+    position: absolute;
+    left: 320px;
+    right: 30px;
+    bottom: 5px;
+    height: auto;
+}
+
+.polygonQueryResult > .title {
+    height: 35px;
+    background-color: rgba(26,57,144, 0.8);
+    line-height: 35px;
+    color: white;
+}
+
+.polygonQueryResult > .title > span {
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.polygonQueryResult > .title > select {
+    min-width: 150px;
+    max-width: 300px;
+    height: 28px;
+    border: none;
+}
+
+.polygonQueryResult > .title > .close {
+    float: right;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.polygonQueryResult > .content {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: auto;
+    background-color: rgba(255,255,255,0.8);
+    max-height: 270px;
+    min-width: 100px;
+    border: 1px solid rgba(26,57,144, 0.8);
+}
+
+.polygonQueryResult > .content > .noResult {
+    height: 80px;
+    line-height: 80px;
+    text-align: center;
+    font-size: 18px;
+    width: 100%;
+}
+
+.polygonQueryResult > .content > table tr {
+    cursor: pointer;
+}
+
+.polygonQueryResult > .content > table tr:hover {
+    opacity: 1;
+}
+
+.polygonQueryResult > .content > table tr:first-child {
+    cursor: default;
+}
+
+.xyPanel {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    height: 30px;
+    width: auto;
+    padding: 0px 15px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.IconToolbar > div {
+    width: 32px;
+    height: auto;
+    background-color: transparent;
+    float: left;
+    border-left: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+}
+
+.IconToolbar > div:first-child {
+    border-left-width: 0px;
+    border-radius: 2px 0px 0px 2px;
+}
+
+.IconToolbar > div:last-child {
+    border-radius: 0px 2px 2px 0px;
+}
+
+.IconToolbar > div:hover {
+    background-color: #0065AB;
+}
+
+.IconToolbar > .selected {
+    background-color: #0065AB;
+}
+
+.IconToolbar > div > img {
+    width: 16px;
+    height: 16px;
+    float: left;
+    margin: 2px 8px 2px 8px;
+}
+.esri-legend {
+    background-color: rgba(0, 0, 0, 0.00) !important;
+    color: #ffffff !important;
+    max-width: 100px;
+}

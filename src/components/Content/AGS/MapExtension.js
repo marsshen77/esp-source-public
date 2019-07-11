@@ -40,7 +40,7 @@ const mapExtensions = function (map) {
             "esri/geometry/SpatialReference",
             "esri/geometry/Extent",
             "dojo/domReady!"
-        ], options).then(function (Basemap, TileLayer, Map, MapView, SpatialReference, Extent) {
+        ], options).then(function ([Basemap, TileLayer, Map, MapView, SpatialReference, Extent]) {
             var map = new Map({
                 basemap: null,
             });
@@ -67,7 +67,7 @@ const mapExtensions = function (map) {
     this.createLayerTree = function (mapView, containerID, callBack) {
         loadModules([
             "esri/widgets/LayerList", "dojo/domReady!"
-        ], options).then(function (LayerList) {
+        ], options).then(function ([LayerList]) {
             var layerList = new LayerList({
                 view: mapView,
                 container: containerID
@@ -81,7 +81,7 @@ const mapExtensions = function (map) {
         loadModules([
             "esri/widgets/Legend",
             "dojo/domReady!"
-        ], options).then(function (Legend) {
+        ], options).then(function ([Legend]) {
             //// 添加图例
             var layer = mapView.map.findLayerById(layerID)
             if (layer) {
@@ -108,7 +108,7 @@ const mapExtensions = function (map) {
             "esri/views/SceneView",
             "esri/layers/BaseTileLayer",
             "dojo/domReady!"
-        ], options).then(function (Map, esriConfig, esriRequest, Color, SceneView, BaseTileLayer) {
+        ], options).then(function ([Map, esriConfig, esriRequest, Color, SceneView, BaseTileLayer]) {
             var TintLayer = BaseTileLayer.createSubclass({
                 properties: {
                     urlTemplate: null,
@@ -189,8 +189,8 @@ const mapExtensions = function (map) {
             "esri/Color",
             "dojo/domReady!"
         ], options).then(function (
-            GroupLayer, esriConfig, esriRequest, MapImageLayer, FeatureLayer, TileLayer, BaseTileLayer, CSVLayer,
-            WebTileLayer, TileInfo, SpatialReference, Color) {
+            [GroupLayer, esriConfig, esriRequest, MapImageLayer, FeatureLayer, TileLayer, BaseTileLayer, CSVLayer,
+            WebTileLayer, TileInfo, SpatialReference, Color]) {
 
             var TintLayer = BaseTileLayer.createSubclass({
                 properties: {

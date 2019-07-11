@@ -1,8 +1,9 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import './EMultiLayout.less';
 
 const EMultiLayout = props => {
+    const [currentClass, setCurrentClass] = useState('p1');
     let code = props.code || 'M_11';
     const showSelect = code === 'M_SELECT';
     const showTabs = code === 'M_TABS';
@@ -257,9 +258,11 @@ const EMultiLayout = props => {
     }
     const createItems = () => {
         const [type] = code.split('_');
+        const showOne = showSelect || showTabs;
         let styles;
         if (type == 'M') {
-            styles = calcItemsStyle();
+            if (showOne) styles = [{ height: '100%', width: '100%' }];
+            else styles = calcItemsStyle();
         }
         if (type == 'F' || type == 'FH') {
             styles = calcFloatItemsStyle();
@@ -269,7 +272,8 @@ const EMultiLayout = props => {
 
         for (let index = 0; index < count; index++) {
             const className = 'p' + (index + 1);
-            const styleIndex = index;
+            if (showOne && className !== currentClass) continue;
+            const styleIndex = showOne ? 0 : index;
             const showMin = (type === 'FH' && index !== 0) ? true : false;
             const item =
                 <EMultiLayoutItem key={props.children[index].props.ID} className={className} style={styles[styleIndex]} content={props.children[index]} showMin={showMin} minCallback={minCallback} />
@@ -280,8 +284,8 @@ const EMultiLayout = props => {
     const minCallback = () => {
 
     }
-    const changeItem = () => {
-
+    const changeItem = (current) => {
+        setCurrentClass(current);
     }
     const layoutCode = code;
     const childrenItems = createItems();
@@ -379,7 +383,7 @@ class EMultiLayoutTabS extends React.Component {
     render() {
         let current = this.state.current;
         const optionItems = this.props.optionItems.map((item) =>
-            <li key={item.value}  value={item.value} className={current === item.value ? 'currentTab' : ''} onClick={this.changeFunc}>{
+            <li key={item.value} value={item.value} className={current === item.value ? 'currentTab' : ''} onClick={this.changeFunc}>{
                 item.text}</li>);
         return (
             <div className={this.props.className}>

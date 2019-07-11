@@ -1,6 +1,9 @@
 import { loadModules } from 'esri-loader';
 import { useFetch } from '../../Hooks/ToolsHooks';
+import EMapLayer from './MapLayer';
 import mapExtensions from './MapExtension';
+import EMapViewToolbar from './MapToolbar';
+import './Map.less';
 const options = { url: `http://172.16.9.121:8078/arcgis_js_api/library/4.8/init.js` };
 class EMapViewControl extends React.Component {
     constructor(props) {
@@ -160,7 +163,7 @@ class EMapViewControl extends React.Component {
         var _this = this;
         var result = toolBarItems.map(function (item) {
             var Control = window[item.ToolName];
-            var content = <Control itemModel={item} mapControl={_this} />;
+            var content = <Control key={item.ID} itemModel={item} mapControl={_this} />;
             return content;
         });
         return result;
@@ -264,7 +267,7 @@ class EMapViewControl extends React.Component {
         var _this = this;
         loadModules([
             "esri/tasks/IdentifyTask", "esri/tasks/support/IdentifyParameters", "esri/Graphic", "dojo/domReady!"
-        ], options).then(function (IdentifyTask, IdentifyParameters, Graphic) {
+        ], options).then(function ([IdentifyTask, IdentifyParameters, Graphic]) {
             var identifyTask = new IdentifyTask(layer.url);
             var params = new IdentifyParameters();
             params.tolerance = 10;
@@ -298,7 +301,7 @@ class EMapViewControl extends React.Component {
     identifyDynamicLayer(QueryDynamicLayerUrl, drawFrameGeometry) {
         var _this = this;
         loadModules(["esri/tasks/IdentifyParameters", "esri/tasks/IdentifyTask", "esri/layers/ArcGISDynamicMapServiceLayer", "dojo/domReady!"
-        ], options).then(function (IdentifyParameters, IdentifyTask, ArcGISDynamicMapServiceLayer) {
+        ], options).then(function ([IdentifyParameters, IdentifyTask, ArcGISDynamicMapServiceLayer]) {
             var identifyParams = new IdentifyParameters();
             identifyParams.geometry = drawFrameGeometry
             identifyParams.tolerance = 3;
@@ -319,13 +322,11 @@ class EMapViewControl extends React.Component {
     //选中的要素高亮
 
     render() {
-        var imgStyle = {
+        const imgStyle = {
             width: '100%',
             height: '100%'
         };
-        console.log("mapModel");
-        console.log(this.props.mapModel);
-        var mapID = 'eMap_' + this.props.mapModel.ID;
+        const mapID = 'eMap_' + this.props.mapModel.ID;
         return (
             <div className='mapViewContainer'>
                 <div id={mapID} style={imgStyle}>
@@ -370,7 +371,7 @@ class EMapViewControl extends React.Component {
 }; */
 
 const EMapContainer = props => {
-    const mapModel = useFetch(`${esp.url}api/Map/Get?id=${props.ID}`);
+    const mapModel = useFetch(`${esp.url}api/Map/GetDebug?id=${props.ID}`);
     if (!mapModel) return null;
     const controlName = mapModel.ControlName || 'EMapViewControl';
     if (controlName === 'EMapViewControl') return (<EMapViewControl mapModel={mapModel} />)

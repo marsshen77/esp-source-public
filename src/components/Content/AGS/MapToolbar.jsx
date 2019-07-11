@@ -1,3 +1,5 @@
+import React from 'react';
+const current = {};
 class BaseToolbarItem extends React.Component {
     constructor(props) {
         super(props);
@@ -83,7 +85,7 @@ class ShowLayerToolbarItem extends BaseToolbarItem {
     onCloseLayer(sender) {
         $('#mapListTree').hide();
     }
-    
+
 };
 
 class IdentifyToolbarItem extends BaseToolbarItem {
@@ -96,21 +98,19 @@ class IdentifyToolbarItem extends BaseToolbarItem {
             console.log(this.props.mapControl);
             this.toogleActive(toolBarItemModel.isChecked);
         };
-      
+
     }
 
     toogleActive(isChecked) {
-        if (isChecked){
+        if (isChecked) {
             this.props.mapControl.listenAllLayer();
         }
         else {
             this.props.mapControl.unListenAllLayer();
         }
     }
-   
+
 };
-
-
 
 class EMapViewToolbar extends React.Component {
     constructor(props) {
@@ -134,7 +134,7 @@ class EMapViewToolbar extends React.Component {
     onItemLoaded(sender) {
         if (sender.props.itemModel.GroupName) {
             this.addGroup(sender.props.itemModel.GroupName, sender);
-        }else{
+        } else {
             console.warn("Can't find groupname");
         }
     }
@@ -151,8 +151,8 @@ class EMapViewToolbar extends React.Component {
 
         var _this = this;
         var result = toolBarItems.map(function (item) {
-            var Control = window[item.ToolName];
-            var content = <Control itemModel={item} mapControl={mapControl} parent={_this} onLoaded={_this.onItemLoaded.bind(_this)} />;
+            var Control = current[item.ToolName] || window[item.ToolName];
+            var content = <Control key={item.ID} itemModel={item} mapControl={mapControl} parent={_this} onLoaded={_this.onItemLoaded.bind(_this)} />;
             return content;
         });
 
@@ -196,5 +196,8 @@ class EMapViewToolbar extends React.Component {
         );
     }
 };
+current.ShowLayerToolbarItem = ShowLayerToolbarItem;
+current.IdentifyToolbarItem = IdentifyToolbarItem;
+export default EMapViewToolbar;
 
 
